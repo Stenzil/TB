@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title%}
+Login
+{%endblock%}
+
+{% block body%}
+<div style="margin-top: 10vh;">
+
+	<div class="container text-white ">
+		<div class="di" style="font-size: 200px;">
+			<div class="di">
+				<span class="material-icons" style="font-size: 10rem;">
+					military_tech
+				</span>
+			</div>
+			<div class="ditext mt-1" style="font-size: 15rem;">
+				<p>BT</p>
+			</div>
+		</div>
+
+		<div class="row align-middle">
+
+			<div class=" col-md-offset-4 ">
+				<form method=POST action="{{url_for('login')}}">
+					<div class="form-group align-middle">
+						<input type="text" class="form-control bg-dark m-2 " name="username" placeholder="Username"
+							style="height:2rem;color: white;" required>
+					</div>
+					<div class="form-group">
+
+						<input type="password" class="form-control m-2 bg-dark " name="pass" placeholder="Password"
+							style="height:2rem; color: white;" required>
+					</div>
+
+					<button type="submit" class="btn btn-secondary float-end btn-lg ditext rounded "
+						style="font-size:small;height:2rem; width:6rem">Login</button>
+
+				</form>
+				<br>
+				<div>
+					Don't have acconut - > <a href="{{url_for('register')}}">Sign Up</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+{%endblock%}

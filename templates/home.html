@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+
+{%block title%} {%endblock%}
+{% block body%}
+<div class="container mb-3  bg-black" style="padding:0; margin-top: 0px;">
+
+</div>
+
+
+
+<div class="container " style="font-family:Optima;padding: 0px;overflow:hidden">
+	<div style="  overflow-y: scroll; height: 100vh;">
+		<div class="difont" style="font-size: 20px; height: fit-content;">
+			<p class="m-2">Home</p>
+		</div>
+		<br>
+
+		<form method=POST action="{{url_for('postUpdate')}}">
+			<div class="form-group align-middle text-white rounded">
+				<textarea class="form-control bg-black" name="postContent" rows="3" style="color:white; border: 0;"
+					required placeholder="What's happening..... ?"></textarea>
+
+				<button type="submit" class="btn btn-secondary m-2 float-end btn-lg ditext rounded-pill"
+					style="font-size:small;height:2rem; width:6rem">Tweet</button>
+			</div>
+
+
+
+		</form>
+		<hr class="mt-5" />
+		{% for post in posts %}
+
+		<div class=" text-white mx-auto m-1"
+			style="border-color: rgba(61, 61, 61, 0.848); border-bottom: solid; border-width: 1px; border-color:  rgba(61, 61, 61, 0.848);;">
+			<div class="m-3">
+				<div class="text-info display-inline"><a style="text-decoration: inherit; color:inherit"
+						href="/profile?user={{post.authorID}}">{{post.author}}</a>
+				</div>
+				<div class=" rounded">
+					<small class="lead text-muted">{{post.content}}</small>
+
+				</div>
+				<div class="align-center mx-auto">
+					<img class=" rounded mt-3 mb-2"
+						src="https://source.unsplash.com/random/200x200?sig= +{{ range(1, 51) | random }}" width="83%"
+						height="400" style="margin-left: 3rem;">
+
+				</div>
+
+
+			</div>
+			<div class="row display-inline text-info"
+				style="  text-align: center; margin-top: -1rem; margin-left: 2rem; margin-right: 2.25rem;">
+				<div class="col-3">
+					<span class="material-icons">
+						bar_chart
+					</span>
+				</div>
+				<div class="col-3">
+					<span class="material-symbols-outlined">
+						textsms
+					</span>
+				</div>
+				<div class="col-3">
+					<span class="material-icons">
+						favorite
+					</span>
+				</div>
+				<div class="col-3">
+					<span class="material-icons">
+						ios_share
+					</span>
+				</div>
+
+			</div>
+
+		</div>
+
+		{% endfor %}
+	</div>
+
+</div>
+
+
+
+</nav>
+{%endblock%}
+{% block rightnav%}
+<div class="mt-2 ">
+	<div style="font-weight: bold; color: rgb(217, 217, 232); padding: 1rem; margin-bottom: -1.5rem; font-size: 20px;">
+		What's happening
+	</div>
+	<br>
+	<div class="container">
+		{% for i in right %}
+		<div class=" mb-1 text-white" style="height: 4.5rem; margin-left: 0.5rem;">
+			<div class="Trending " style="font-size: 15px; color: rgb(92, 92, 92); padding: 0px;margin-bottom: -4px;">
+				{{i.loc}}</div>
+			<div class="Title" style="font-size: 17px;">{{i.title}}</div>
+			<div class="Count" style="font-size: 15px; color: rgb(88, 87, 87); padding: 0px; margin-top:-3px;">
+				{{i.count}}
+			</div>
+
+		</div>
+		{% endfor %}
+		<a class="text-info" style="text-decoration: inherit;">See more</a>
+	</div>
+
+</div>
+{%endblock%}
+{% block rightlownav%}
+<div class="mt-2 ">
+	<div style="font-weight: bold; color: rgb(217, 217, 232); padding: 1rem; margin-bottom: -1.5rem; font-size: 20px;">
+		Who to follow
+	</div>
+	<br>
+	<div class="container">
+
+		<div class="row  display-inline mt-4" style="margin-bottom: 3rem;">
+			<div class="col-2 icon display-inline" style="margin-left: 1rem;">
+				<img src="https://buffer.com/library/content/images/2022/03/sigmund-MQ2xYBHImKM-unsplash--1--1.jpg"
+					style=" width: 3.75rem;height: 3.75rem; border-radius: 50%; margin-top: -1.5rem;">
+
+			</div>
+			<div class=" col-5 float-start display-inline" style="margin-top: -1rem; ">
+				<p class="ditext " style="font-weight: bold; font-size: 18px;">Monica</p><br>
+				<div style="margin-top: -1.5rem; margin-left:1rem"><small
+						style="color: rgb(88, 87, 87);">@ekalra</small>
+				</div>
+
+			</div>
+			<div class="col-4 float-end" style="margin-top: -1.25rem;">
+				<input type="button"
+					class="defont btn btn-secondary btn-lg rounded-pill mt-2 bg-black text-white float-end"
+					id="followBtn" style="font-size:14px; width:5rem; height: 2.30rem; " name="selectedUser"
+					value="Follow">
+			</div>
+
+		</div>
+		<div class="row  display-inline mt-4" style="margin-bottom: 3rem;">
+			<div class="col-2 icon display-inline" style="margin-left: 1rem;">
+				<img src="http://images.huffingtonpost.com/2016-06-14-1465937915-7357528-74537a070d0b4da196fa7b2c1f2c70ef.jpg"
+					style=" width: 3.75rem;height: 3.75rem;  border-radius: 50%; margin-top: -1.5rem;">
+
+			</div>
+			<div class=" col-5 float-start display-inline" style="margin-top: -1rem; ">
+				<p class="ditext " style="font-weight: bold; font-size: 18px;">Tina C</p><br>
+				<div style="margin-top: -1.5rem; margin-left:1rem"><small
+						style="color: rgb(88, 87, 87);">@eColuK</small>
+				</div>
+
+			</div>
+			<div class="col-4 float-end" style="margin-top: -1.25rem;">
+				<input type="button"
+					class="defont btn btn-secondary btn-lg rounded-pill mt-2 bg-black text-white float-end"
+					id="followBtn" style="font-size:14px; width:5rem; height: 2.30rem; " name="selectedUser"
+					value="Follow">
+			</div>
+
+		</div>
+		<div class="row  display-inline mt-4" style="margin-bottom: 3rem;">
+			<div class="col-2 icon display-inline" style="margin-left: 1rem;">
+				<img src="https://www.judesbarbershop.com/wp-content/uploads/2021/03/Barber-Shop-Haircut-460x460.jpg"
+					style=" width: 3.75rem;height: 3.75rem;  border-radius: 50%; margin-top: -1.5rem;">
+
+			</div>
+			<div class=" col-5 float-start display-inline" style="margin-top: -1rem; ">
+				<p class="ditext " style="font-weight: bold; font-size: 18px;">Vikas Das</p><br>
+				<div style="margin-top: -1.5rem; margin-left:1rem"><small style="color: rgb(88, 87, 87);">@kuka</small>
+				</div>
+
+			</div>
+			<div class="col-4 float-end" style="margin-top: -1.25rem;">
+				<input type="button"
+					class="defont btn btn-secondary btn-lg rounded-pill mt-2 bg-black text-white float-end"
+					id="followBtn" style="font-size:14px; width:5rem; height: 2.30rem; " name="selectedUser"
+					value="Follow">
+			</div>
+
+		</div>
+
+
+
+	</div>
+
+	{%endblock%}

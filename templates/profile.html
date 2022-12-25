@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% block head%}
+<script>
+	function changeFollow();
+	{
+		console.log("I'm here in console");
+		document.getElementById("followBtn").value = "Following";
+
+	}
+</script>
+
+{%endblock%}
+
+{% block title%}Home - Register {%endblock%}
+{% block body%}
+<div class="container-fluid">
+	{% for u in user %}
+	<div class="cover " style="padding: 0;">
+		<img src="https://images.unsplash.com/photo-1504805572947-34fad45aed93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y292ZXIlMjBwaG90b3xlbnwwfHwwfHw%3D&w=1000&q=80"
+			class="img-fluid border-bottom" alt="Responsive image"
+			style="width: 100%; height: 12rem;border-style: solid;border-width: 3px;  ">
+	</div>
+
+	<div class="row">
+		<div class="col-4" style="margin-top: -4rem; margin-left: 2rem;margin-right: 8rem;">
+			<img src="https://avatars.githubusercontent.com/u/37077527?v=4"
+				style="position: inherit; width: 8rem;height: 8rem; border-style: solid;border-width: 3px; border-radius: 50%;">
+		</div>
+		<div class="col-4 float-end">
+			{% if follow %}
+			<input type="button" class="defont btn btn-secondary btn-lg rounded-pill mt-2 bg-black text-white float-end"
+				id="followBtn" style="font-size:17px; width:7rem; height: 2.65rem; margin-left: -20px;"
+				name="selectedUser" value="Following">
+			{% else %}
+			<input type="button" onclick="changeFollow('{{u._id}}')"
+				class="defont btn btn-secondary btn-lg rounded-pill mt-2 bg-info text-white float-end" id="followBtn"
+				style="font-size:17px; width:7rem; height: 2.5rem; margin-left: -20px;" name="selectedUser"
+				value="Follow">
+
+			{% endif %}
+
+		</div>
+
+	</div>
+	<div>
+		<p class="m-2 font-weight-bold" style="font-weight:900;">{{u.name}}</p>
+	</div>
+
+	{% endfor %}
+
+	<div class="container" style="font-family:Optima;padding: 0px;">
+		<div class="overflow-auto" style="  overflow-y: scroll; height: 75vh;">
+			{% for post in datas %}
+
+			<div class=" text-white mx-auto m-1"
+				style="border-color: rgba(61, 61, 61, 0.848); border-bottom: solid; border-width: 1px; border-color:  rgba(61, 61, 61, 0.848);;">
+				<div class="m-3">
+					<div class="text-info display-inline"><a style="text-decoration: inherit; color:inherit"
+							href="/profile?user={{post.authorID}}">{{post.author}}</a>
+					</div>
+					<div class=" rounded">
+						<small class="lead text-muted">{{post.content}}</small>
+
+					</div>
+					<div class="align-center mx-auto">
+						<img class=" rounded mt-3 mb-2"
+							src="https://source.unsplash.com/random/200x200?sig= +{{ range(1, 51) | random }}"
+							width="83%" height="400" style="margin-left: 3rem;">
+
+					</div>
+
+
+				</div>
+				<div class="row display-inline text-info"
+					style="  text-align: center; margin-top: -1rem; margin-left: 2rem; margin-right: 2.25rem;">
+					<div class="col-3">
+						<span class="material-icons">
+							bar_chart
+						</span>
+					</div>
+					<div class="col-3">
+						<span class="material-symbols-outlined">
+							textsms
+						</span>
+					</div>
+					<div class="col-3">
+						<span class="material-icons">
+							favorite
+						</span>
+					</div>
+					<div class="col-3">
+						<span class="material-icons">
+							ios_share
+						</span>
+					</div>
+
+				</div>
+
+			</div>
+
+			{% endfor %}
+		</div>
+
+	</div>
+
+
+
+</div>
+
+
+
+{%endblock%}
+{% block rightnav%}
+<div class="mt-2 ">
+	<div style="font-weight: bold; color: rgb(217, 217, 232); padding: 1rem; margin-bottom: -1.5rem; font-size: 20px;">
+		What's happening
+	</div>
+	<br>
+	<div class="container">
+		{% for i in right %}
+		<div class=" mb-1 text-white" style="height: 4.5rem; margin-left: 0.5rem;">
+			<div class="Trending " style="font-size: 15px; color: rgb(92, 92, 92); padding: 0px;margin-bottom: -4px;">
+				{{i.loc}}</div>
+			<div class="Title" style="font-size: 17px;">{{i.title}}</div>
+			<div class="Count" style="font-size: 15px; color: rgb(88, 87, 87); padding: 0px; margin-top:-3px;">
+				{{i.count}}
+			</div>
+
+		</div>
+		{% endfor %}
+		<a class="text-info" style="text-decoration: inherit;">See more</a>
+	</div>
+
+</div>
+{%endblock%}
+{% block rightlownav%}
+<div class="mt-2 ">
+	<div style="font-weight: bold; color: rgb(217, 217, 232); padding: 1rem; margin-bottom: -1.5rem; font-size: 20px;">
+		Who to follow
+	</div>
+	<br>
+	<div class="container">
+
+		<div class="row  display-inline mt-4" style="margin-bottom: 3rem;">
+			<div class="col-2 icon display-inline" style="margin-left: 1rem;">
+				<img src="https://buffer.com/library/content/images/2022/03/sigmund-MQ2xYBHImKM-unsplash--1--1.jpg"
+					style=" width: 3.75rem;height: 3.75rem; border-radius: 50%; margin-top: -1.5rem;">
+
+			</div>
+			<div class=" col-5 float-start display-inline" style="margin-top: -1rem; ">
+				<p class="ditext " style="font-weight: bold; font-size: 18px;">Monica</p><br>
+				<div style="margin-top: -1.5rem; margin-left:1rem"><small
+						style="color: rgb(88, 87, 87);">@ekalra</small>
+				</div>
+
+			</div>
+			<div class="col-4 float-end" style="margin-top: -1.25rem;">
+				<input type="button"
+					class="defont btn btn-secondary btn-lg rounded-pill mt-2 bg-black text-white float-end"
+					id="followBtn" style="font-size:14px; width:5rem; height: 2.30rem; " name="selectedUser"
+					value="Follow">
+			</div>
+
+		</div>
+		<div class="row  display-inline mt-4" style="margin-bottom: 3rem;">
+			<div class="col-2 icon display-inline" style="margin-left: 1rem;">
+				<img src="http://images.huffingtonpost.com/2016-06-14-1465937915-7357528-74537a070d0b4da196fa7b2c1f2c70ef.jpg"
+					style=" width: 3.75rem;height: 3.75rem;  border-radius: 50%; margin-top: -1.5rem;">
+
+			</div>
+			<div class=" col-5 float-start display-inline" style="margin-top: -1rem; ">
+				<p class="ditext " style="font-weight: bold; font-size: 18px;">Tina C</p><br>
+				<div style="margin-top: -1.5rem; margin-left:1rem"><small
+						style="color: rgb(88, 87, 87);">@eColuK</small>
+				</div>
+
+			</div>
+			<div class="col-4 float-end" style="margin-top: -1.25rem;">
+				<input type="button"
+					class="defont btn btn-secondary btn-lg rounded-pill mt-2 bg-black text-white float-end"
+					id="followBtn" style="font-size:14px; width:5rem; height: 2.30rem; " name="selectedUser"
+					value="Follow">
+			</div>
+
+		</div>
+		<div class="row  display-inline mt-4" style="margin-bottom: 3rem;">
+			<div class="col-2 icon display-inline" style="margin-left: 1rem;">
+				<img src="https://www.judesbarbershop.com/wp-content/uploads/2021/03/Barber-Shop-Haircut-460x460.jpg"
+					style=" width: 3.75rem;height: 3.75rem;  border-radius: 50%; margin-top: -1.5rem;">
+
+			</div>
+			<div class=" col-5 float-start display-inline" style="margin-top: -1rem; ">
+				<p class="ditext " style="font-weight: bold; font-size: 18px;">Vikas Das</p><br>
+				<div style="margin-top: -1.5rem; margin-left:1rem"><small style="color: rgb(88, 87, 87);">@kuka</small>
+				</div>
+
+			</div>
+			<div class="col-4 float-end" style="margin-top: -1.25rem;">
+				<input type="button"
+					class="defont btn btn-secondary btn-lg rounded-pill mt-2 bg-black text-white float-end"
+					id="followBtn" style="font-size:14px; width:5rem; height: 2.30rem; " name="selectedUser"
+					value="Follow">
+			</div>
+
+		</div>
+
+
+
+	</div>
+
+	{%endblock%}
